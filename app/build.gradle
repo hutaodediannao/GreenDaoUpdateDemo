@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.app.rxjava.greendaoproject"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        releaseBeat {
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            minifyEnabled false
+            zipAlignEnabled true
+        }
+    }
+
+    greendao {
+        schemaVersion 5
+        daoPackage 'com.app.rxjava.greendaoproject.db'
+        targetGenDir 'src/main/java'
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'org.greenrobot:greendao:3.2.0'
+    //数据库升级帮助，实现了不删除本地数据的基础上实现表字段添加，删除的操作
+    implementation 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v2.0.3'
+}
+
+
